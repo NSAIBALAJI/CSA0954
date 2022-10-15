@@ -1,0 +1,351 @@
+1).inter thread.java
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+class details
+{
+	public int a,b,i,cal;
+	Scanner sc=new Scanner(System.in);
+    	public void detail()
+    	{
+        	try
+		{
+			System.out.println("Enter the a and b: ");
+			a=sc.nextInt();
+			b=sc.nextInt();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.out.println("Invalid");	
+			System.exit(0);	
+		}
+    	}
+}
+ 
+class calc extends details 
+{
+    	public void calcu() 
+	{ 
+		for(i=1;i<=10;i++)
+		{
+	        	cal=a*i;
+		      System.out.println(a +"*" +i+"=" +cal);
+		}
+		System.out.println();	
+	}
+}
+ 
+class display extends calc 
+{
+    	public void dis()
+    	{
+      	for(i=1;i<=10;i++)
+	    	{
+			cal=b*i;
+		      System.out.println(b +"*" +i+"="+cal );
+		}
+    	}
+}
+ 
+// Drived class
+public class table 
+{
+    	public static void main(String[] args)
+    	{
+        	display g = new display();
+        	g.detail();
+        	g.calcu();
+        	g.dis();
+    	}
+}
+
+2).fiz.java
+import java.util.*;
+public class fiz
+{
+	public static void main(String[] args)
+	{
+		try
+		{
+			int n,i;
+			String s;
+			List<String>col=new ArrayList<>();
+			Scanner sc=new Scanner(System.in);
+			System.out.print("Enter number: ");
+			n=sc.nextInt();
+			for(i=1;i<=n;i++)
+			{
+				if(i%3==0 && i%5==0)
+				{
+					col.addAll(Arrays.asList("FizzBuzz"));
+				}
+				else if(i%3==0)
+				{
+					col.addAll(Arrays.asList("Fizz"));
+				}
+				else if(i%5==0)
+				{
+					col.addAll(Arrays.asList("Buzz"));
+				}
+				else
+				{
+					s=Integer.toString(i);
+					col.addAll(Arrays.asList(s));
+				}
+			}
+			System.out.println();
+			System.out.println(col);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.out.println("Invalid");
+		}
+	}
+}
+
+3).roman.java
+import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+class roman
+{   
+	private static final Map<Character,
+	Integer> roman = new HashMap<Character, 
+	Integer>() 
+	{
+		{
+
+    			put('I', 1);
+	
+    			put('V', 5);
+
+   			put('X', 10);
+  
+    			put('L', 50);
+
+    			put('C', 100);
+
+    			put('D', 500);
+
+    			put('M', 1000);
+		}
+	};
+	private static int romanToInt(String s)
+	{
+
+    		int sum = 0;
+	     int n = s.length();
+	     for(int i = 0; i < n; i++) 
+		{
+        		if (i!=n-1 && roman.get(s.charAt(i))<roman.get(s.charAt(i+1)))
+        		{
+				sum += roman.get(s.charAt(i + 1))-roman.get(s.charAt(i));
+		          i++;
+        		} 
+        		else
+        		{
+            		sum += roman.get(s.charAt(i));
+        		}
+    		}
+    		return sum;
+	}
+ 
+	// Driver Code
+	public static void main(String[] args) 
+	{
+		 // Considering inputs given are valid
+    		String input;
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter roman number: ");
+		input=sc.nextLine();
+		input=input.toUpperCase();
+		for(int i=0; i<input.length();i++)
+		{
+			char h=input.charAt(i);
+			if(h=='I' || h=='V'  || h=='X'||h=='L'|| h=='C'|| h=='D'|| h=='M')
+			{
+				System.out.print("");
+			}
+			else
+			{
+				System.out.print("Invalid");
+				return;
+			}
+		}
+    		System.out.print("Integer form of Roman Numeral is " + romanToInt(input));
+	}
+}
+
+4).ransom.java
+import java.util.*;
+class ransom
+{
+    	public static boolean canConstruct(String ransomNote, String magazine)
+ 	{
+        	if (ransomNote==null || ransomNote.length() == 0)
+		{ 
+			return true;	
+		}
+        	if (magazine==null || magazine.length() == 0) 
+		{
+			return false;
+        	}
+		boolean flag=false;
+        	boolean visited[]=new boolean[magazine.length()];
+        	Arrays.fill(visited,Boolean.FALSE);
+        	for(int i=0;i<ransomNote.length();i++)
+		{
+            	flag=false;
+            	for(int j=0;j<magazine.length();j++)
+			{
+                		if(ransomNote.charAt(i)==magazine.charAt(j) && !visited[j] )
+				{
+                    			visited[j]=true;
+                    			flag=true;
+                    			break;
+                		}
+            	}
+        	}
+        	return flag;
+    	}
+	public static void main(String[] args) 
+	{
+		String ransomNote;
+		String magazine;
+		Scanner sc=new Scanner(System.in);
+		System.out.print("ransomNote= ");
+		ransomNote=sc.nextLine();	
+		System.out.print("magazine= ");	
+		magazine=sc.nextLine();
+		System.out.println(canConstruct(ransomNote, magazine));
+	}
+}
+
+5).weekly.java
+import java.util.*;
+public class weeke
+{
+	public int[] orderIndexAscending(int[] array) 
+	{
+        	int[] minimumIndexes = new int[array.length];
+        	int[] sortedArray = array.clone();
+        	Arrays.sort(sortedArray);
+        	for (int index = 0; index < array.length; index++)
+		{
+            	int minIndex = 0;
+            	for (int number : array) 
+			{
+                		if(number == sortedArray[index]) 
+				{ 
+                    		minimumIndexes[index] = minIndex;
+                    		break;
+                		}
+                		minIndex++;
+            	}
+		}
+        	return minimumIndexes;
+    	}
+	public static void main(String[] args)
+	{
+		try
+		{
+		int i,j,n=5,c,k;
+		List<Integer>prin_t=new ArrayList<>();
+		int a[][]=new int[n][n];
+		int x[]=new int[n];
+		Scanner s=new Scanner(System.in);
+		System.out.println("Enter the matrix: ");
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				a[i][j]=s.nextInt();
+			}
+		}
+		System.out.print("Enter k: ");
+		k=s.nextInt();
+		for(i=0;i<n;i++)
+		{
+			c=0;
+			for(j=0;j<n;j++)
+			{
+				if(a[i][j]==1)
+				{
+					c++;
+				}	
+			}
+			System.out.println(i+" Row: "+c);
+			x[i]=c;
+		}
+		/*for(i=0;i<n;i++)
+		{
+			System.out.print(" "+x[i]);
+		}*/
+		int index = 0;
+    		int min = x[index];
+    		for (i = 1; i <n; i++)
+		{
+        		if (x[i] <= min)
+			{
+       			min = x[i];
+        			index = i;
+        		}
+    		}
+		System.out.println("\nWeakest row = "+index);
+		weeke finder = new weeke();
+        	int[] indixes = finder.orderIndexAscending(x);
+        	System.out.println("Indexes of the array in ascending order: "+Arrays.toString(indixes));
+		for(i=0;i<k;i++)
+		{
+			prin_t.addAll(Arrays.asList(indixes[i]));
+		}
+		System.out.println(prin_t);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Invalid");
+			System.out.println(e);
+		}
+    	}
+}
+
+6).steps.java
+import java.util.*;
+public class steps
+{
+	public static void main(String[] args)
+	{
+		try
+		{
+			int c=0;
+			Scanner sc=new Scanner(System.in);
+			System.out.print("Enter number: ");
+			int n=sc.nextInt();
+			System.out.println("Explanation: ");
+			while(n!=0)
+			{	
+				c++;
+				if(n%2==0)
+				{
+					System.out.printf("\nStep %d:- %d is even; divide by 2 and obtain ",c,n);
+					n=n/2;
+					System.out.print(n);
+				}
+				else
+				{
+					System.out.printf("\nStep %d:- %d is odd; subtract 1 and obtain ",c,n);
+					n=n-1;
+					System.out.print(n);
+				}
+			}
+			System.out.println("\nTotal No. of steps= "+c);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.out.println("Invalid");
+		}
+	}
+}
