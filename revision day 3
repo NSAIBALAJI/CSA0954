@@ -1,0 +1,601 @@
+1).bonus.java
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+ 
+class detail
+{
+	public double t,b,bou,s;
+	public String g;
+	public char c;
+    	public void getdetails()
+    	{
+        	try
+		{
+			Scanner sc =new Scanner(System.in);
+			System.out.print("Enter grade of employee: ");
+			g=sc.nextLine();
+			c=g.charAt(0);
+			System.out.print("Enter the employee salary: ");
+			s=sc.nextDouble();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.exit(0);
+		}
+    	}
+}
+ 
+class valid extends detail 
+{
+    	public void vali() 
+	{
+		try
+		{
+			if(s<0)
+			{
+		    		System.out.println("Invalid Salary can not be negative");
+		    		System.exit(0);
+			}
+			if(c=='A' || c=='B')
+			{
+		    		System.out.println();
+			}
+			else
+			{
+		    		System.out.println("Invalid Grade");
+		    		System.exit(0);
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.exit(0);
+		}
+		
+	}
+}
+ 
+class cal extends valid
+{
+    	public void calcu()
+    	{
+        	if(g.equals("A"))
+		{
+		    	b=0.05*s;
+		    	if(s<10000)
+    			{
+    		    		bou=b+(0.02*s);
+    		    		t=s+bou;
+			}
+			else
+    			{
+    		    		t=s+b;
+			}
+		}
+		else if(g.equals("B"))
+		{
+		    	b=0.1*s;
+		    	if(s<10000)
+    			{
+    		    		bou=b+(0.02*s);
+    		    		t=s+bou;
+			}
+			else
+    			{
+    		    		t=s+b;
+			}
+		}
+    	}
+}
+class display extends cal
+{
+	public void dis()
+    	{
+		System.out.println("Salary: "+s);
+    		System.out.println("Bonus: "+b);
+    		System.out.println("Total be paid: "+t);
+	}
+}
+// Drived class
+public class bonus
+{
+    	public static void main(String[] args)
+    	{	
+        	display g = new display();
+        	g.getdetails();
+        	g.vali();
+        	g.calcu();
+		g.dis();
+    }
+}
+
+2).grade.java
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+ 
+interface detail 
+{
+    public void getdetails();
+}
+ 
+interface valid 
+{
+    public void validating();
+}
+interface calc 
+{
+    public void calcu();
+}
+interface display extends detail,valid,calc 
+{
+    public void dis();
+}
+class child implements display 
+{
+	public double to,p,c,m,ph,a;
+	Scanner sc=new Scanner(System.in);
+    	public void getdetails()
+    	{
+		try
+		{
+        		System.out.print("Enter the python marks: ");
+			p=sc.nextDouble();
+			System.out.print("Enter the c programming marks: ");
+			c=sc.nextDouble();
+			System.out.print("Enter the Maths marks: ");
+			m=sc.nextDouble();
+			System.out.print("Enter the Physics marks: ");
+			ph=sc.nextDouble();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.out.println("Invalid");	
+			System.exit(0);	
+		}
+    	}
+    	public void validating() 
+	{ 
+		if(p<0 || c<0 || m<0 || ph<0 || p>100 || c>100 || m>100 || ph>100)
+		{
+			System.out.print("Invalid input");	
+			System.exit(0);
+		}
+		if(p<40 || c<40 || m<40 || ph<40)
+		{
+			System.out.print("Grade: Fail");	
+			System.exit(0);
+		}
+	}
+	public void calcu()
+	{
+		try
+		{
+			to=p+c+m+ph;
+			a=(to/400)*100;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.out.println("Invalid");	
+			System.exit(0);	
+		}
+	}
+	public void dis()
+	{
+		System.out.println("Total= "+to);
+		System.out.println("Aggregate= "+a);
+		if(a>=75)
+		{
+			System.out.println("Distincttion");
+		}
+		else if(a>=60 && a<75)
+		{
+			System.out.println("First Division");
+		}
+		else if(a>=50 && a<60)
+		{
+			System.out.println("Second Division");
+		}
+		else if(a>=40 && a<50)
+		{
+			System.out.println("Third Division");
+		}
+		else
+		{
+			System.out.println("Fail");			
+		}
+	}
+}
+
+// Drived class
+public class grade
+{
+    	public static void main(String[] args)
+    	{	
+        	child c = new child();
+        	c.getdetails();
+        	c.validating();
+        	c.calcu();
+		c.dis();
+    	}
+}
+
+3).tax.java
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+class details
+{
+	public double x,y,amount;
+	Scanner input = new Scanner(System.in);
+    	public void detail()
+    	{
+		try
+		{
+        		System.out.println("Enter the amount:");
+        		amount = input.nextDouble();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.out.println("Invalid");	
+			System.exit(0);
+		}
+    	}
+}
+ 
+class calc extends details 
+{
+    	public void cal()
+	{ 
+		if(amount<=0)
+	      {
+		 	System.out.println("Invalid");
+		      System.exit(0);
+        	} 
+        	if(amount<=150000)
+        	{
+            	System.out.println("No Tax");
+		      System.exit(0);
+        	}
+		x=amount;
+		if(x>150000 && x<=300000)
+		{
+			y=x*0.1;
+		}
+		if(x>300000 && x<=500000)
+		{
+			y=x*0.2;
+		}
+		if(x>500000)
+		{
+			y=x*0.3;
+		}
+          	if(amount==0||amount<0||x<0)
+        	{
+          		System.out.println("Invalid");    
+        	}
+	}
+}
+
+class display extends calc 
+{
+    public void dis()
+    {
+    		System.out.println("Tax: "+y);
+    }
+}
+ 
+// Drived class	
+public class tax 
+{
+    public static void main(String[] args)
+    {
+        display g = new display();
+        g.detail();
+        g.cal();
+        g.dis();
+    }
+}
+
+4).grade.java 2
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+ 
+interface detail 
+{
+    public void getdetails();
+}
+ 
+interface valid 
+{
+    public void validating();
+}
+interface calc 
+{
+    public void calcu();
+}
+interface display extends detail,valid,calc 
+{
+    public void dis();
+}
+class child implements display 
+{
+	public double to,p,c,m,ph,a;
+	Scanner sc=new Scanner(System.in);
+    	public void getdetails()
+    	{
+		try
+		{
+        		System.out.print("Enter the python marks: ");
+			p=sc.nextDouble();
+			System.out.print("Enter the c programming marks: ");
+			c=sc.nextDouble();
+			System.out.print("Enter the Maths marks: ");
+			m=sc.nextDouble();
+			System.out.print("Enter the Physics marks: ");
+			ph=sc.nextDouble();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.out.println("Invalid");	
+			System.exit(0);	
+		}
+    	}
+    	public void validating() 
+	{ 
+		if(p<0 || c<0 || m<0 || ph<0 || p>100 || c>100 || m>100 || ph>100)
+		{
+			System.out.print("Invalid input");	
+			System.exit(0);
+		}
+		if(p<40 || c<40 || m<40 || ph<40)
+		{
+			System.out.print("Grade: Fail");	
+			System.exit(0);
+		}
+	}
+	public void calcu()
+	{
+		try
+		{
+			to=p+c+m+ph;
+			a=(to/400)*100;
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.out.println("Invalid");	
+			System.exit(0);	
+		}
+	}
+	public void dis()
+	{
+		System.out.println("Total= "+to);
+		System.out.println("Aggregate= "+a);
+		if(a>=75)
+		{
+			System.out.println("Distincttion");
+		}
+		else if(a>=60 && a<75)
+		{
+			System.out.println("First Division");
+		}
+		else if(a>=50 && a<60)
+		{
+			System.out.println("Second Division");
+		}
+		else if(a>=40 && a<50)
+		{
+			System.out.println("Third Division");
+		}
+		else
+		{
+			System.out.println("Fail");			
+		}
+	}
+}
+
+// Drived class
+public class grade
+{
+    	public static void main(String[] args)
+    	{	
+        	child c = new child();
+        	c.getdetails();
+        	c.validating();
+        	c.calcu();
+		c.dis();
+    	}
+}
+
+5).bank.java
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class Bank
+{
+	public double n,p;
+	public float roi,t;
+	public String b;
+	Scanner sc=new Scanner(System.in);
+	Scanner s=new Scanner(System.in);
+	public void getdetails()
+	{	
+		try
+		{
+			System.out.print("Enter amount: ");
+			n=sc.nextDouble();
+			System.out.print("Enter bank: ");
+			b=s.nextLine();
+			b=b.trim();
+			System.out.print("Enter time period: ");
+			t=s.nextFloat();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.out.println("Invalid");
+			System.exit(0);
+		}
+	}
+}
+class cal extends Bank
+{
+	public void calc()
+	{	
+		if(b.equalsIgnoreCase("SBI"))
+		{
+			roi=8.4f;
+			p=(n*roi*t)/100;
+		}
+		else if(b.equalsIgnoreCase("ICIC"))
+		{
+			roi=9.7f;
+			p=(n*roi*t)/100;
+		}
+		else if(b.equalsIgnoreCase("AXIS"))
+		{
+			roi=7.3f;
+			p=(n*roi*t)/100;
+		}
+		else
+		{
+			System.out.println("Invalid bank");
+			System.exit(0);
+		}
+	}
+}
+class display extends cal
+{
+	public void dis()
+	{	
+		System.out.println("Rate of interest = "+roi);
+		System.out.println("Bank = "+b);
+		System.out.printf("Interest amount= %.2f",p);
+	}
+}
+public class bank_roi
+{
+	public static void main(String[] args)
+	{
+		display d=new display();
+		d.getdetails();
+		d.calc();
+		d.dis();
+	}
+}
+
+6).singleinheritance.java
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+ 
+class details
+{
+	public int a,b;
+	Scanner sc=new Scanner(System.in);
+    	public void details()
+    	{
+		try
+		{
+       		System.out.print("Number 1: ");
+			a=sc.nextInt();
+			System.out.print("Number 2: ");
+			b=sc.nextInt(); 
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.out.println("Invalid");	
+			System.exit(0);	
+		}
+    	}
+}
+ 
+class display extends details
+{
+    	public void display() 
+	{ 
+		System.out.println("Number 1= "+a);
+		System.out.println("Number 2= "+b);
+	}
+}
+// Driver class
+public class single_inher
+{
+    	public static void main(String[] args)
+    	{
+        	display g = new display();
+        	g.details();
+        	g.display();
+    	}
+}
+
+7).table.java
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+class details
+{
+	public int a,b,i,cal;
+	Scanner sc=new Scanner(System.in);
+    	public void detail()
+    	{
+        	try
+		{
+			System.out.println("Enter the a and b: ");
+			a=sc.nextInt();
+			b=sc.nextInt();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+			System.out.println("Invalid");	
+			System.exit(0);	
+		}
+    	}
+}
+ 
+class calc extends details 
+{
+    	public void calcu() 
+	{ 
+		for(i=1;i<=10;i++)
+		{
+	        	cal=a*i;
+		      System.out.println(a +"*" +i+"=" +cal);
+		}
+		System.out.println();	
+	}
+}
+ 
+class display extends calc 
+{
+    	public void dis()
+    	{
+      	for(i=1;i<=10;i++)
+	    	{
+			cal=b*i;
+		      System.out.println(b +"*" +i+"="+cal );
+		}
+    	}
+}
+ 
+// Drived class
+public class table 
+{
+    	public static void main(String[] args)
+    	{
+        	display g = new display();
+        	g.detail();
+        	g.calcu();
+        	g.dis();
+    	}
+}
